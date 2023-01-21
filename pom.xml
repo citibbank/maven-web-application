@@ -99,7 +99,8 @@
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
 	      <url>http://3.6.36.144:9010/saidevops/repository/citibank-release/</url>
-	    </repository>
+		
+		</repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
