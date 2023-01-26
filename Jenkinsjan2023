@@ -1,0 +1,23 @@
+node{
+    echo "The node name is: ${env.NODE_NAME}"
+    echo "the job name is : ${env.JOB_NAME}"
+    def mavenHome = tool name: 'maven-3.8.7'
+ 
+ stage('checkcode'){
+ git branch: 'development', credentialsId: '8f24fe7f-55a7-4966-86a1-6d4189f60567', url: 'https://github.com/citibbank/maven-web-application.git'
+ }
+ 
+ 
+ stage('Build'){
+ sh "${mavenHome}/bin/mvn clean package"
+ }
+ stage('GeneratesonarqubeReport'){
+     sh "${mavenHome}/bin/mvn sonar:sonar"
+ }
+     
+    stage('Deployintoartifact'){
+    sh "${mavenHome}/bin/mvn deploy"    
+    } 
+ 
+ 
+}
