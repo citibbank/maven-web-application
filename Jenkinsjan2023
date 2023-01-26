@@ -7,10 +7,7 @@ node{
  git branch: 'development', credentialsId: '8f24fe7f-55a7-4966-86a1-6d4189f60567', url: 'https://github.com/citibbank/maven-web-application.git'
  properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
  }
- 
- 
- 
- 
+  
  stage('Build'){
  sh "${mavenHome}/bin/mvn clean package"
  }
@@ -21,6 +18,10 @@ node{
     stage('Deployintoartifact'){
     sh "${mavenHome}/bin/mvn deploy"    
     } 
+ stage('DeployintoTomcat'){
+  sshagent(['51862c7a-c589-4b70-ac83-075e56b5bb3f']) {
+    sh " scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.235.247.207:opt/apache-tomcat-9.0.70/webapps"
+}
  
  
 }
