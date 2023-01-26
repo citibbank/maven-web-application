@@ -5,7 +5,7 @@ node{
  
  stage('checkcode'){
  git branch: 'development', credentialsId: '8f24fe7f-55a7-4966-86a1-6d4189f60567', url: 'https://github.com/citibbank/maven-web-application.git'
- properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([cron('* * * * *')])])
+ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
  }
  
  
